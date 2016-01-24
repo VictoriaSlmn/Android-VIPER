@@ -16,10 +16,6 @@ public abstract class Interactor<ResultType, ParameterType> {
         this.iuScheduler = iuScheduler;
     }
 
-//    public Interactor() {
-//        this(Schedulers.computation(), AndroidSchedulers.mainThread());
-//    }
-
     protected abstract Observable<ResultType> buildObservable(ParameterType parameter);
 
     public void execute(ParameterType parameter, Subscriber<ResultType> subscriber) {

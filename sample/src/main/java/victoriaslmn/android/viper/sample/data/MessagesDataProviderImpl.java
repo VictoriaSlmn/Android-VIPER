@@ -28,7 +28,7 @@ public class MessagesDataProviderImpl implements MessagesDataProvider {
         List<Message> result = new ArrayList<>();
         int contactId = 0;
         for (int i = 0; i < times + 5; i++) {
-            result.add(new Message(i, new Contact(contactId, "contact" + i % 5), "content" + i, NOW + i));
+            result.add(new Message(i, new Contact(contactId, "Contact " + contactId), "Message " + i, NOW + i*10000));
             if (contactId < Contact.SAMPLE_MAX_CONTACT_COUNT - 1) {
                 contactId++;
             }else {

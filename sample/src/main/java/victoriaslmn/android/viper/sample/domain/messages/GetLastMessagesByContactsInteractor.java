@@ -5,17 +5,21 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import rx.Observable;
 import rx.Scheduler;
 import victoriaslmn.android.viper.sample.domain.common.Interactor;
+import victoriaslmn.android.viper.sample.presentation.injection.PresentationModule;
 
 public class GetLastMessagesByContactsInteractor extends Interactor<List<Message>, Void> {
 
     private final MessagesDataProvider messagesDataProvider;
 
     @Inject
-    public GetLastMessagesByContactsInteractor(Scheduler jobScheduler, Scheduler iuScheduler, MessagesDataProvider messagesDataProvider) {
+    public GetLastMessagesByContactsInteractor(@Named(PresentationModule.JOB) Scheduler jobScheduler,
+                                               @Named(PresentationModule.UI) Scheduler iuScheduler,
+                                               MessagesDataProvider messagesDataProvider) {
         super(jobScheduler, iuScheduler);
         this.messagesDataProvider = messagesDataProvider;
     }

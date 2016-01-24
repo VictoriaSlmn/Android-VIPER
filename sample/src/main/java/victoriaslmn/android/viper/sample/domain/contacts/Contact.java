@@ -1,6 +1,8 @@
 package victoriaslmn.android.viper.sample.domain.contacts;
 
-public class Contact {
+import java.io.Serializable;
+
+public class Contact implements Serializable {
     public static final int SAMPLE_MAX_CONTACT_COUNT = 10;
     private final int id;
     private final String name;
@@ -12,6 +14,10 @@ public class Contact {
 
     public String getName() {
         return name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override

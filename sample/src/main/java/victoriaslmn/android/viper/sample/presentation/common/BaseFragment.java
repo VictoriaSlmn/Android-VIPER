@@ -2,18 +2,35 @@ package victoriaslmn.android.viper.sample.presentation.common;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import butterknife.ButterKnife;
 
 public abstract class BaseFragment<Presenter extends BasePresenter> extends Fragment {
-    private static long lastFragmentId = 0;
+    private static final AtomicInteger lastFragmentId = new AtomicInteger(0);
     private final long fragmentId;
 
     private Presenter presenter;
 
     public BaseFragment() {
-        lastFragmentId++;
-        fragmentId = lastFragmentId;
+        fragmentId = lastFragmentId.incrementAndGet();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Class cls = getClass();
+        if (!cls.isAnnotationPresent(Layout.class)) return null;
+        Annotation annotation = cls.getAnnotation(Layout.class);
+        Layout layout = (Layout) annotation;
+        View view = inflater.inflate(layout.id(), null);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
@@ -48,6 +65,13 @@ public abstract class BaseFragment<Presenter extends BasePresenter> extends Frag
     public void onStop() {
         super.onStop();
         presenter.onStop();
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        ButterKnife.unbind(this);
+        super.onDestroyView();
     }
 
     public String getFragmentName() {

@@ -2,4 +2,6 @@
     <string name="app_name">sample</string>
     <string name="action_settings">Settings</string>
     <string name="chats">Chats</string>
+    <string name="error">Apllication error! Sorry...</string>
+    <string name="new_message_comming">New messages coming!</string>
 </resources>
