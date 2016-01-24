@@ -1,32 +1,37 @@
 package victoriaslmn.android.viper.sample.domain.common;
 
 import rx.Observable;
+import rx.Scheduler;
 import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
-import victoriaslmn.android.viper.sample.domain.injection.DaggerInteractorComponent;
-import victoriaslmn.android.viper.sample.domain.injection.DataModule;
-import victoriaslmn.android.viper.sample.domain.injection.InteractorComponent;
 
 
 public abstract class Interactor<ResultType, ParameterType> {
-    protected static InteractorComponent injectionComponent = DaggerInteractorComponent.builder()
-            .dataModule(new DataModule())
-            .build();
-
     private CompositeSubscription subscription = new CompositeSubscription();
+    protected final Scheduler jobScheduler;
+    private final Scheduler iuScheduler;
 
-    public void execute(ParameterType parameter, Subscriber<ResultType> subscriber) {
-        subscription.add(buildObservable(parameter)
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(subscriber));
+    public Interactor(Scheduler jobScheduler, Scheduler iuScheduler) {
+        this.jobScheduler = jobScheduler;
+        this.iuScheduler = iuScheduler;
     }
+
+//    public Interactor() {
+//        this(Schedulers.computation(), AndroidSchedulers.mainThread());
+//    }
 
     protected abstract Observable<ResultType> buildObservable(ParameterType parameter);
 
-    protected abstract void inject();
+    public void execute(ParameterType parameter, Subscriber<ResultType> subscriber) {
+        subscription.add(buildObservable(parameter)
+                .subscribeOn(jobScheduler)
+                .observeOn(iuScheduler)
+                .subscribe(subscriber));
+    }
+
+    public void execute(Subscriber<ResultType> subscriber) {
+        execute(null, subscriber);
+    }
 
     public void unsubscribe() {
         if (!subscription.isUnsubscribed()) {

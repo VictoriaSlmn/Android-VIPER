@@ -38,12 +38,6 @@ android {
     }
 }
 
-retrolambda {
-    jdk '/Library/Java/JavaVirtualMachines/jdk1.8.0_71.jdk/Contents/Home'//System.getenv("JAVA_8")
-    oldJdk System.getenv("JAVA_HOME")
-    javaVersion JavaVersion.VERSION_1_7
-}
-
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])

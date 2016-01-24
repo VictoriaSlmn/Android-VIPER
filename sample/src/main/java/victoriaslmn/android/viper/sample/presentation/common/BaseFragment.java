@@ -1,17 +1,15 @@
 package victoriaslmn.android.viper.sample.presentation.common;
 
 import android.os.Bundle;
-import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
-import android.widget.Toast;
 
 import java.lang.reflect.ParameterizedType;
 
-public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements BaseView {
+public abstract class BaseFragment<Presenter extends BasePresenter> extends Fragment {
     private static long lastFragmentId = 0;
     private final long fragmentId;
-    ;
-    private T presenter;
+
+    private Presenter presenter;
 
     public BaseFragment() {
         lastFragmentId++;
@@ -43,7 +41,7 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
                 = (ParameterizedType) getClass().getGenericSuperclass();
         String parameterClassName
                 = pt.getActualTypeArguments()[0].toString().split("\\s")[1];
-        presenter = (T) Class.forName(parameterClassName).newInstance();
+        presenter = (Presenter) Class.forName(parameterClassName).newInstance();
     }
 
     @Override
@@ -52,18 +50,11 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
         presenter.onStop();
     }
 
-    @Override
-    public void showError(@StringRes int message) {
-        Toast.makeText(getContext(), getString(message), Toast.LENGTH_LONG).show();
-    }
-
     public String getFragmentName() {
         return Long.toString(fragmentId);
     }
 
-    protected T getPresenter() {
+    protected Presenter getPresenter() {
         return presenter;
     }
-
-    public abstract int getTitle();
 }

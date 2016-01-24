@@ -1,4 +1,4 @@
-package victoriaslmn.android.viper.sample.presentation.note;
+package victoriaslmn.android.viper.sample.presentation.messages;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -9,11 +9,12 @@ import com.google.common.base.Preconditions;
 import butterknife.Bind;
 import victoriaslmn.android.viper.sample.R;
 import victoriaslmn.android.viper.sample.presentation.common.BaseActivity;
-import victoriaslmn.android.viper.sample.presentation.common.BaseFragment;
 import victoriaslmn.android.viper.sample.presentation.common.Layout;
+import victoriaslmn.android.viper.sample.presentation.messages.common.BaseMessagesFragment;
+import victoriaslmn.android.viper.sample.presentation.messages.last.LastMessagesFragment;
 
 @Layout(id = R.layout.activity_main)
-public class MainActivity extends BaseActivity {
+public class MessagesActivity extends BaseActivity implements MessagesRouter {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
 
@@ -21,11 +22,12 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setSupportActionBar(toolbar);
+        addBackStack(new LastMessagesFragment());
 //        fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                .setAction("Action", null).show());
     }
 
-    protected void addBackStack(BaseFragment fragment) {
+    private void addBackStack(BaseMessagesFragment fragment) {
         Preconditions.checkNotNull(fragment);
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         tx.replace(R.id.content, fragment);
@@ -34,7 +36,7 @@ public class MainActivity extends BaseActivity {
         resolveToolbar(fragment);
     }
 
-    private void resolveToolbar(BaseFragment fragment) {
+    private void resolveToolbar(BaseMessagesFragment fragment) {
         toolbar.setTitle(fragment.getTitle());
     }
 }

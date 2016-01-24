@@ -1,7 +1,8 @@
 package victoriaslmn.android.viper.sample.presentation.common;
 
-public abstract class BasePresenter<View extends BaseView> {
+public abstract class BasePresenter<View, Router> {
     private View view;
+    private Router router;
 
     /**
      * Default constructor.  <strong>Every</strong> presenter must have an
@@ -22,6 +23,14 @@ public abstract class BasePresenter<View extends BaseView> {
 
     public void setView(View view) {
         this.view = view;
+    }
+
+    public Router getRouter() {
+        return router;
+    }
+
+    public void setRouter(Router router) {
+        this.router = router;
     }
 }
 
