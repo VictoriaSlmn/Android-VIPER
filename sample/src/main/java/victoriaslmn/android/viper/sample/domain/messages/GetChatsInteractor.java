@@ -12,14 +12,14 @@ import rx.Scheduler;
 import victoriaslmn.android.viper.sample.domain.common.Interactor;
 import victoriaslmn.android.viper.sample.presentation.injection.PresentationModule;
 
-public class GetLastMessagesByContactsInteractor extends Interactor<List<Message>, Void> {
+public class GetChatsInteractor extends Interactor<List<Message>, Void> {
 
     private final MessagesDataProvider messagesDataProvider;
 
     @Inject
-    public GetLastMessagesByContactsInteractor(@Named(PresentationModule.JOB) Scheduler jobScheduler,
-                                               @Named(PresentationModule.UI) Scheduler iuScheduler,
-                                               MessagesDataProvider messagesDataProvider) {
+    public GetChatsInteractor(@Named(PresentationModule.JOB) Scheduler jobScheduler,
+                              @Named(PresentationModule.UI) Scheduler iuScheduler,
+                              MessagesDataProvider messagesDataProvider) {
         super(jobScheduler, iuScheduler);
         this.messagesDataProvider = messagesDataProvider;
     }

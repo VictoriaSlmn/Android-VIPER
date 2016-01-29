@@ -11,11 +11,11 @@ import victoriaslmn.android.viper.sample.domain.common.Interactor;
 import victoriaslmn.android.viper.sample.domain.contacts.Contact;
 import victoriaslmn.android.viper.sample.presentation.injection.PresentationModule;
 
-public class GetMessagesByContactInteractor extends Interactor<List<Message>, Contact> {
+public class GetByContactMessagesInteractor extends Interactor<List<Message>, Contact> {
     private final MessagesDataProvider messagesDataProvider;
 
     @Inject
-    public GetMessagesByContactInteractor(@Named(PresentationModule.JOB) Scheduler jobScheduler,
+    public GetByContactMessagesInteractor(@Named(PresentationModule.JOB) Scheduler jobScheduler,
                                           @Named(PresentationModule.UI) Scheduler iuScheduler,
                                           MessagesDataProvider messagesDataProvider) {
         super(jobScheduler, iuScheduler);
