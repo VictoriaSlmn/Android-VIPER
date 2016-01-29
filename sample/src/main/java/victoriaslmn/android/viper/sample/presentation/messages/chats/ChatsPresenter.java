@@ -5,14 +5,12 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import rx.Subscriber;
 import victoriaslmn.android.viper.sample.R;
-import victoriaslmn.android.viper.sample.domain.common.Interactor;
 import victoriaslmn.android.viper.sample.domain.contacts.Contact;
+import victoriaslmn.android.viper.sample.domain.messages.GetMessagesByContactInteractor;
 import victoriaslmn.android.viper.sample.domain.messages.Message;
-import victoriaslmn.android.viper.sample.presentation.injection.DomainModule;
 import victoriaslmn.android.viper.sample.presentation.injection.Injector;
 import victoriaslmn.android.viper.sample.presentation.messages.common.BaseMessagesPresenter;
 
@@ -21,8 +19,7 @@ public class ChatsPresenter extends BaseMessagesPresenter<ChatsView> {
     private final List<ChatViewModel> chatViewModels = new ArrayList<>();
 
     @Inject
-    @Named(DomainModule.LAST_MESSAGE)
-    Interactor<List<Message>, Void> getLastMessagesByContactsInteractor;
+    GetMessagesByContactInteractor getLastMessagesByContactsInteractor;
 
     public ChatsPresenter() {
         Injector.getPresentersComponent().inject(this);

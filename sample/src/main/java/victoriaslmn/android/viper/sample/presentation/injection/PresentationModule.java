@@ -8,7 +8,6 @@ import dagger.Provides;
 import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import victoriaslmn.android.viper.sample.presentation.messages.common.TimeMapper;
 
 @Module
 public class PresentationModule {

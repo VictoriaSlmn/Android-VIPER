@@ -5,7 +5,6 @@ import android.app.Application;
 
 import victoriaslmn.android.viper.sample.presentation.injection.DaggerPresentersComponent;
 import victoriaslmn.android.viper.sample.presentation.injection.DataModule;
-import victoriaslmn.android.viper.sample.presentation.injection.DomainModule;
 import victoriaslmn.android.viper.sample.presentation.injection.Injector;
 import victoriaslmn.android.viper.sample.presentation.injection.PresentationModule;
 
@@ -17,7 +16,6 @@ public class App extends Application {
                 DaggerPresentersComponent
                         .builder()
                         .dataModule(new DataModule())
-                        .domainModule(new DomainModule())
                         .presentationModule(new PresentationModule())
                         .build());
     }

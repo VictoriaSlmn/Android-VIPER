@@ -6,14 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import rx.Subscriber;
 import victoriaslmn.android.viper.sample.R;
-import victoriaslmn.android.viper.sample.domain.common.Interactor;
 import victoriaslmn.android.viper.sample.domain.contacts.Contact;
+import victoriaslmn.android.viper.sample.domain.messages.GetMessagesByContactInteractor;
 import victoriaslmn.android.viper.sample.domain.messages.Message;
-import victoriaslmn.android.viper.sample.presentation.injection.DomainModule;
 import victoriaslmn.android.viper.sample.presentation.injection.Injector;
 import victoriaslmn.android.viper.sample.presentation.messages.common.BaseMessagesPresenter;
 import victoriaslmn.android.viper.sample.presentation.messages.common.TimeMapper;
@@ -23,8 +21,7 @@ public class ByContactMessagesPresenter extends BaseMessagesPresenter<ByContactM
     private final List<MessageViewModel> viewModels = new ArrayList<>();
 
     @Inject
-    @Named(DomainModule.MESSAGE_BY_CONTACT)
-    Interactor<List<Message>, Contact> getMessagesByContactInteractor;
+    GetMessagesByContactInteractor getMessagesByContactInteractor;
 
     public ByContactMessagesPresenter() {
         Injector.getPresentersComponent().inject(this);

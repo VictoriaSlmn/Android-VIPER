@@ -7,7 +7,7 @@ import victoriaslmn.android.viper.sample.presentation.messages.bycontact.ByConta
 import victoriaslmn.android.viper.sample.presentation.messages.chats.ChatsPresenter;
 
 @Singleton
-@Component(modules = {PresentationModule.class, DomainModule.class, DataModule.class})
+@Component(modules = {PresentationModule.class, DataModule.class})
 public interface PresentersComponent {
     void inject(ChatsPresenter chatsPresenter);
 
