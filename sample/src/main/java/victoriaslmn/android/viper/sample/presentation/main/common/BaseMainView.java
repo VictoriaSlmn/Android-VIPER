@@ -7,7 +7,6 @@ import victoriaslmn.android.viper.sample.presentation.injection.MainActivityComp
 public interface BaseMainView {
     void showError(@StringRes int message);
     void showNewMessagesNotification();
-    MainActivityComponent getMainActivityComponent();
 }
 
 

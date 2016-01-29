@@ -22,10 +22,6 @@ public class MessagesPresenter extends BaseMainPresenter<MessagesView> {
     @Inject
     GetMessagesInteractor getMessagesInteractor;
 
-    public MessagesPresenter() {
-        getView().getMainActivityComponent().inject(this);
-    }
-
     public void init(@NonNull Contact contact) {
         this.contact = contact;
         getView().resolveTitle(contact.getName());

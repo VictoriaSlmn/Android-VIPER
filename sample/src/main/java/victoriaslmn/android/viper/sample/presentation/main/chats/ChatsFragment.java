@@ -43,6 +43,11 @@ public class ChatsFragment extends BaseMainFragment<ChatsPresenter> implements C
     }
 
     @Override
+    protected void injectPresenter() {
+        getMainActivityComponent().inject(getPresenter());
+    }
+
+    @Override
     public void updateChats() {
         chatsAdapter.notifyDataSetChanged();
     }

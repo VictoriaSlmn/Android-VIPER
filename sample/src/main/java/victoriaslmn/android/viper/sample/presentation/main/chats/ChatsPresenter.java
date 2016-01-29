@@ -20,10 +20,6 @@ public class ChatsPresenter extends BaseMainPresenter<ChatsView> {
     @Inject
     GetChatsInteractor getChatsInteractor;
 
-    public ChatsPresenter() {
-        getView().getMainActivityComponent().inject(this);
-    }
-
     @Override
     public void onStart() {
         getChatsInteractor.execute(new Subscriber<List<Message>>() {

@@ -30,6 +30,7 @@ public abstract class BaseMainFragment<Presenter extends BaseMainPresenter> exte
         super.onActivityCreated(savedInstanceState);
         setRetainInstance(true);
         MainActivity mainActivity = (MainActivity) getActivity();
+        injectPresenter();
         //noinspection unchecked
         getPresenter().setRouter(mainActivity);
         mainActivity.resolveToolbar(this);
@@ -49,8 +50,10 @@ public abstract class BaseMainFragment<Presenter extends BaseMainPresenter> exte
         Snackbar.make(getView(), R.string.new_message_comming, Snackbar.LENGTH_LONG).show();
     }
 
-    @Override
-    public MainActivityComponent getMainActivityComponent() {
+
+    protected abstract void injectPresenter();
+
+    protected MainActivityComponent getMainActivityComponent() {
         return ((MainActivity)getActivity()).getMainActivityComponent();
     }
 

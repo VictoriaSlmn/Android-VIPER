@@ -41,6 +41,11 @@ public class MessagesFragment extends BaseMainFragment<MessagesPresenter> implem
     }
 
     @Override
+    protected void injectPresenter() {
+        getMainActivityComponent().inject(getPresenter());
+    }
+
+    @Override
     public String getTitle() {
         return title;
     }
