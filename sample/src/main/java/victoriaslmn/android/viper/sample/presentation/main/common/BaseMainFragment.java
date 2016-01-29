@@ -20,6 +20,8 @@ public abstract class BaseMainFragment<Presenter extends BaseMainPresenter> exte
     @DrawableRes
     public abstract int getFabButtonIcon();
 
+    public abstract View.OnClickListener getFabButtonAction();
+
     @Override
     public void showError(@StringRes int message) {
         Toast.makeText(getContext(), getString(message), Toast.LENGTH_LONG).show();
@@ -56,6 +58,4 @@ public abstract class BaseMainFragment<Presenter extends BaseMainPresenter> exte
     protected MainActivityComponent getMainActivityComponent() {
         return ((MainActivity)getActivity()).getMainActivityComponent();
     }
-
-    public abstract View.OnClickListener getFabButtonAction();
 }
