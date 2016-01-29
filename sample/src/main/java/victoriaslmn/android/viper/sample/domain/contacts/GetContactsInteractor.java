@@ -2,6 +2,7 @@ package victoriaslmn.android.viper.sample.domain.contacts;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import rx.Observable;
@@ -13,6 +14,7 @@ public class GetContactsInteractor extends Interactor<List<Contact>, Void> {
 
     private final ContactsDataProvider contactsDataProvider;
 
+    @Inject
     public GetContactsInteractor(@Named(DomainModule.JOB) Scheduler jobScheduler,
                                  @Named(DomainModule.UI) Scheduler iuScheduler,
                                  ContactsDataProvider contactsDataProvider) {

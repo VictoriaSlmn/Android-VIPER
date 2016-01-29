@@ -20,6 +20,7 @@ import victoriaslmn.android.viper.sample.presentation.injection.DomainModule;
 import victoriaslmn.android.viper.sample.presentation.injection.MainActivityComponent;
 import victoriaslmn.android.viper.sample.presentation.main.chats.ChatsFragment;
 import victoriaslmn.android.viper.sample.presentation.main.common.BaseMainFragment;
+import victoriaslmn.android.viper.sample.presentation.main.contacts.ContactsFragment;
 import victoriaslmn.android.viper.sample.presentation.main.messages.MessagesFragment;
 
 @Layout(id = R.layout.activity_main)
@@ -45,7 +46,7 @@ public class MainActivity extends BaseActivity implements MainRouter {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if(getSupportFragmentManager().getBackStackEntryCount() == 0) {
+        if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
             addBackStack(new ChatsFragment());
         }
         return super.onCreateOptionsMenu(menu);
@@ -60,11 +61,11 @@ public class MainActivity extends BaseActivity implements MainRouter {
     }
 
     public void resolveFab(BaseMainFragment fragment) {
-        if(fragment.getFabButtonIcon() > 0){
+        if (fragment.getFabButtonIcon() > 0) {
             floatingActionButton.setImageResource(fragment.getFabButtonIcon());
             floatingActionButton.setVisibility(View.VISIBLE);
             floatingActionButton.setOnClickListener(fragment.getFabButtonAction());
-        }else {
+        } else {
             floatingActionButton.setVisibility(View.GONE);
             floatingActionButton.setOnClickListener(null);
         }
@@ -83,8 +84,13 @@ public class MainActivity extends BaseActivity implements MainRouter {
     }
 
     @Override
-    public void showChatDetails(Contact contact) {
+    public void showMessages(Contact contact) {
         addBackStack(MessagesFragment.newInstance(contact));
+    }
+
+    @Override
+    public void openContacts() {
+        addBackStack(new ContactsFragment());
     }
 
     public MainActivityComponent getMainActivityComponent() {

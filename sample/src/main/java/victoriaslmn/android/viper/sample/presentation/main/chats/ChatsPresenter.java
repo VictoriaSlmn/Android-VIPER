@@ -92,6 +92,10 @@ public class ChatsPresenter extends BaseMainPresenter<ChatsView> {
     }
 
     public void chatSelected(ChatViewModel tag) {
-        getRouter().showChatDetails(new Contact(tag.getId(), tag.getSenderName()));
+        getRouter().showMessages(new Contact(tag.getId(), tag.getSenderName()));
+    }
+
+    public void openContacts() {
+        getRouter().openContacts();
     }
 }

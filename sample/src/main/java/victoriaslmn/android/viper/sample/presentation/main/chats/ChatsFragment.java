@@ -31,7 +31,7 @@ public class ChatsFragment extends BaseMainFragment<ChatsPresenter> implements C
 
     @Override
     public View.OnClickListener getFabButtonAction() {
-        return null;
+        return v -> getPresenter().openContacts();
     }
 
     @Override

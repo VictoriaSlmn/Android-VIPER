@@ -4,6 +4,7 @@ import javax.inject.Singleton;
 
 import dagger.Component;
 import victoriaslmn.android.viper.sample.presentation.main.chats.ChatsPresenter;
+import victoriaslmn.android.viper.sample.presentation.main.contacts.ContactsPresenter;
 import victoriaslmn.android.viper.sample.presentation.main.messages.MessagesPresenter;
 
 @Singleton
@@ -12,4 +13,6 @@ public interface MainActivityComponent {
     void inject(ChatsPresenter chatsPresenter);
 
     void inject(MessagesPresenter messagesPresenter);
+
+    void inject(ContactsPresenter presenter);
 }
