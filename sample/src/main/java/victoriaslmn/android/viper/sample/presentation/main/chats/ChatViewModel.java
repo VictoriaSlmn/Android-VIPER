@@ -1,10 +1,7 @@
-package victoriaslmn.android.viper.sample.presentation.messages.chats;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+package victoriaslmn.android.viper.sample.presentation.main.chats;
 
 import victoriaslmn.android.viper.sample.domain.messages.Message;
-import victoriaslmn.android.viper.sample.presentation.messages.common.TimeMapper;
+import victoriaslmn.android.viper.sample.presentation.main.common.mappers.TimeMapper;
 
 public class ChatViewModel {
     public static ChatViewModel createAllRead(Message message) {

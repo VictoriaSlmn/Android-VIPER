@@ -1,4 +1,4 @@
-package victoriaslmn.android.viper.sample.presentation.messages.chats;
+package victoriaslmn.android.viper.sample.presentation.main.chats;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,25 +9,24 @@ import javax.inject.Inject;
 import rx.Subscriber;
 import victoriaslmn.android.viper.sample.R;
 import victoriaslmn.android.viper.sample.domain.contacts.Contact;
-import victoriaslmn.android.viper.sample.domain.messages.GetMessagesByContactInteractor;
+import victoriaslmn.android.viper.sample.domain.messages.GetChatsInteractor;
 import victoriaslmn.android.viper.sample.domain.messages.Message;
-import victoriaslmn.android.viper.sample.presentation.injection.Injector;
-import victoriaslmn.android.viper.sample.presentation.messages.common.BaseMessagesPresenter;
+import victoriaslmn.android.viper.sample.presentation.main.common.BaseMainPresenter;
 
-public class ChatsPresenter extends BaseMessagesPresenter<ChatsView> {
+public class ChatsPresenter extends BaseMainPresenter<ChatsView> {
 
     private final List<ChatViewModel> chatViewModels = new ArrayList<>();
 
     @Inject
-    GetMessagesByContactInteractor getLastMessagesByContactsInteractor;
+    GetChatsInteractor getChatsInteractor;
 
     public ChatsPresenter() {
-        Injector.getPresentersComponent().inject(this);
+        getView().getMainActivityComponent().inject(this);
     }
 
     @Override
     public void onStart() {
-        getLastMessagesByContactsInteractor.execute(new Subscriber<List<Message>>() {
+        getChatsInteractor.execute(new Subscriber<List<Message>>() {
             @Override
             public void onCompleted() {
             }
@@ -93,7 +92,7 @@ public class ChatsPresenter extends BaseMessagesPresenter<ChatsView> {
 
     @Override
     public void onStop() {
-        getLastMessagesByContactsInteractor.unsubscribe();
+        getChatsInteractor.unsubscribe();
     }
 
     public void chatSelected(ChatViewModel tag) {

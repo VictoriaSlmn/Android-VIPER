@@ -1,4 +1,4 @@
-package victoriaslmn.android.viper.sample.presentation.messages.chats;
+package victoriaslmn.android.viper.sample.presentation.main.chats;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,10 +9,10 @@ import java.util.List;
 import butterknife.Bind;
 import victoriaslmn.android.viper.sample.R;
 import victoriaslmn.android.viper.sample.presentation.common.Layout;
-import victoriaslmn.android.viper.sample.presentation.messages.common.BaseMessagesFragment;
+import victoriaslmn.android.viper.sample.presentation.main.common.BaseMainFragment;
 
 @Layout(id = R.layout.recycler_view)
-public class ChatsFragment extends BaseMessagesFragment<ChatsPresenter> implements ChatsView {
+public class ChatsFragment extends BaseMainFragment<ChatsPresenter> implements ChatsView {
 
     @Bind(R.id.chats_recycler_view)
     RecyclerView recyclerView;

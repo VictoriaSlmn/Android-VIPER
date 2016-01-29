@@ -1,4 +1,4 @@
-package victoriaslmn.android.viper.sample.presentation.messages.bycontact;
+package victoriaslmn.android.viper.sample.presentation.main.messages;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,11 +11,11 @@ import butterknife.Bind;
 import victoriaslmn.android.viper.sample.R;
 import victoriaslmn.android.viper.sample.domain.contacts.Contact;
 import victoriaslmn.android.viper.sample.presentation.common.Layout;
-import victoriaslmn.android.viper.sample.presentation.messages.MessagesActivity;
-import victoriaslmn.android.viper.sample.presentation.messages.common.BaseMessagesFragment;
+import victoriaslmn.android.viper.sample.presentation.main.MainActivity;
+import victoriaslmn.android.viper.sample.presentation.main.common.BaseMainFragment;
 
 @Layout(id = R.layout.recycler_view)
-public class ByContactMessagesFragment extends BaseMessagesFragment<ByContactMessagesPresenter> implements ByContactMessagesView {
+public class MessagesFragment extends BaseMainFragment<MessagesPresenter> implements MessagesView {
     private static final String CONTACT = "CONTACT";
 
     @Bind(R.id.chats_recycler_view)
@@ -24,8 +24,8 @@ public class ByContactMessagesFragment extends BaseMessagesFragment<ByContactMes
     private MessagesAdapter messagesAdapter;
     private String title = null;
 
-    public static ByContactMessagesFragment newInstance(Contact contact) {
-        ByContactMessagesFragment fragment = new ByContactMessagesFragment();
+    public static MessagesFragment newInstance(Contact contact) {
+        MessagesFragment fragment = new MessagesFragment();
         Bundle args = new Bundle();
         args.putSerializable(CONTACT, contact);
         fragment.setArguments(args);
@@ -58,7 +58,7 @@ public class ByContactMessagesFragment extends BaseMessagesFragment<ByContactMes
     @Override
     public void resolveTitle(String title) {
         this.title = title;
-        ((MessagesActivity) getActivity()).resolveToolbar(this);
+        ((MainActivity) getActivity()).resolveToolbar(this);
     }
 
     @Override

@@ -9,15 +9,13 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import rx.Notification;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
 import rx.schedulers.TestScheduler;
 import victoriaslmn.android.viper.sample.domain.contacts.Contact;
-import victoriaslmn.android.viper.sample.domain.messages.GetLastMessagesByContactsInteractor;
+import victoriaslmn.android.viper.sample.domain.messages.GetChatsInteractor;
 import victoriaslmn.android.viper.sample.domain.messages.Message;
 import victoriaslmn.android.viper.sample.domain.messages.MessagesDataProvider;
 
@@ -30,9 +28,6 @@ import static org.mockito.Mockito.when;
 @Config(constants = BuildConfig.class, sdk = 21)
 public class GetLastMessagesByContactsInteractorTest {
 
-    @Inject
-    GetLastMessagesByContactsInteractor getLastMessagesByContactsInteractor;
-
     @Test
     public void testLatestMessageByContactsIsCorrect() {
         Contact contact1 = new Contact(1, "contact1");
@@ -44,11 +39,11 @@ public class GetLastMessagesByContactsInteractorTest {
         TestScheduler testScheduler = Schedulers.test();
         when(messagesDataProvider.getAllMessages(testScheduler))
                 .thenReturn(Observable.just(Notification.createOnNext(Arrays.asList(message1, message2, message3))));
-        GetLastMessagesByContactsInteractor getLastMessagesByContactsInteractor
-                = new GetLastMessagesByContactsInteractor(testScheduler, testScheduler, messagesDataProvider);
+        GetChatsInteractor chatsInteractor
+                = new GetChatsInteractor(testScheduler, testScheduler, messagesDataProvider);
         TestSubscriber<List<Message>> testSubscriber = new TestSubscriber<>();
 
-        getLastMessagesByContactsInteractor.execute(testSubscriber);
+        chatsInteractor.execute(testSubscriber);
         testScheduler.triggerActions();
 
         testSubscriber.assertNoErrors();

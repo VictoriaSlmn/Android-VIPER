@@ -1,4 +1,4 @@
-package victoriaslmn.android.viper.sample.presentation.messages.chats;
+package victoriaslmn.android.viper.sample.presentation.main.chats;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;

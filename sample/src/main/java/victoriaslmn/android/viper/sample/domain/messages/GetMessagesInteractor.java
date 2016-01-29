@@ -9,15 +9,15 @@ import rx.Observable;
 import rx.Scheduler;
 import victoriaslmn.android.viper.sample.domain.common.Interactor;
 import victoriaslmn.android.viper.sample.domain.contacts.Contact;
-import victoriaslmn.android.viper.sample.presentation.injection.PresentationModule;
+import victoriaslmn.android.viper.sample.presentation.injection.DomainModule;
 
-public class GetByContactMessagesInteractor extends Interactor<List<Message>, Contact> {
+public class GetMessagesInteractor extends Interactor<List<Message>, Contact> {
     private final MessagesDataProvider messagesDataProvider;
 
     @Inject
-    public GetByContactMessagesInteractor(@Named(PresentationModule.JOB) Scheduler jobScheduler,
-                                          @Named(PresentationModule.UI) Scheduler iuScheduler,
-                                          MessagesDataProvider messagesDataProvider) {
+    public GetMessagesInteractor(@Named(DomainModule.JOB) Scheduler jobScheduler,
+                                 @Named(DomainModule.UI) Scheduler iuScheduler,
+                                 MessagesDataProvider messagesDataProvider) {
         super(jobScheduler, iuScheduler);
         this.messagesDataProvider = messagesDataProvider;
     }

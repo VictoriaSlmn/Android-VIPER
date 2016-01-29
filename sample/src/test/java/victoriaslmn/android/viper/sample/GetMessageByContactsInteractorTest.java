@@ -15,7 +15,7 @@ import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
 import rx.schedulers.TestScheduler;
 import victoriaslmn.android.viper.sample.domain.contacts.Contact;
-import victoriaslmn.android.viper.sample.domain.messages.GetMessagesByContactInteractor;
+import victoriaslmn.android.viper.sample.domain.messages.GetMessagesInteractor;
 import victoriaslmn.android.viper.sample.domain.messages.Message;
 import victoriaslmn.android.viper.sample.domain.messages.MessagesDataProvider;
 
@@ -39,8 +39,8 @@ public class GetMessageByContactsInteractorTest {
         TestScheduler testScheduler = Schedulers.test();
         when(messagesDataProvider.getAllMessages(testScheduler))
                 .thenReturn(Observable.just(Notification.createOnNext(Arrays.asList(message1, message2, message3))));
-        GetMessagesByContactInteractor getLastMessagesByContactsInteractor
-                = new GetMessagesByContactInteractor(testScheduler, testScheduler, messagesDataProvider);
+        GetMessagesInteractor getLastMessagesByContactsInteractor
+                = new GetMessagesInteractor(testScheduler, testScheduler, messagesDataProvider);
         TestSubscriber<List<Message>> testSubscriber = new TestSubscriber<>();
 
         getLastMessagesByContactsInteractor.execute(contact1,testSubscriber);

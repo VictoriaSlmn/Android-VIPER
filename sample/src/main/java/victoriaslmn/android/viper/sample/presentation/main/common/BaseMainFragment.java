@@ -1,7 +1,6 @@
-package victoriaslmn.android.viper.sample.presentation.messages.common;
+package victoriaslmn.android.viper.sample.presentation.main.common;
 
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
@@ -11,9 +10,10 @@ import android.widget.Toast;
 
 import victoriaslmn.android.viper.sample.R;
 import victoriaslmn.android.viper.sample.presentation.common.BaseFragment;
-import victoriaslmn.android.viper.sample.presentation.messages.MessagesActivity;
+import victoriaslmn.android.viper.sample.presentation.injection.MainActivityComponent;
+import victoriaslmn.android.viper.sample.presentation.main.MainActivity;
 
-public abstract class BaseMessagesFragment<Presenter extends BaseMessagesPresenter> extends BaseFragment<Presenter> implements BaseMessagesView {
+public abstract class BaseMainFragment<Presenter extends BaseMainPresenter> extends BaseFragment<Presenter> implements BaseMainView {
 
     public abstract String getTitle();
 
@@ -29,11 +29,11 @@ public abstract class BaseMessagesFragment<Presenter extends BaseMessagesPresent
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         setRetainInstance(true);
-        MessagesActivity messagesActivity = (MessagesActivity)getActivity();
+        MainActivity mainActivity = (MainActivity) getActivity();
         //noinspection unchecked
-        getPresenter().setRouter(messagesActivity);
-        messagesActivity.resolveToolbar(this);
-        messagesActivity.resolveFab(this);
+        getPresenter().setRouter(mainActivity);
+        mainActivity.resolveToolbar(this);
+        mainActivity.resolveFab(this);
     }
 
 
@@ -49,6 +49,10 @@ public abstract class BaseMessagesFragment<Presenter extends BaseMessagesPresent
         Snackbar.make(getView(), R.string.new_message_comming, Snackbar.LENGTH_LONG).show();
     }
 
+    @Override
+    public MainActivityComponent getMainActivityComponent() {
+        return ((MainActivity)getActivity()).getMainActivityComponent();
+    }
 
     public abstract View.OnClickListener getFabButtonAction();
 }

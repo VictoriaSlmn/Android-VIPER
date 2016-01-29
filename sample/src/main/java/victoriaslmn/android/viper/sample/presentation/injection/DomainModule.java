@@ -10,7 +10,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 @Module
-public class PresentationModule {
+public class DomainModule {
     public static final String JOB = "JOB";
     public static final String UI = "UI";
 

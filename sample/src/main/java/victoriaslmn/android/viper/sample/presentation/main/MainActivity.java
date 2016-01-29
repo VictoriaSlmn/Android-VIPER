@@ -1,4 +1,4 @@
-package victoriaslmn.android.viper.sample.presentation.messages;
+package victoriaslmn.android.viper.sample.presentation.main;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,21 +14,33 @@ import victoriaslmn.android.viper.sample.R;
 import victoriaslmn.android.viper.sample.domain.contacts.Contact;
 import victoriaslmn.android.viper.sample.presentation.common.BaseActivity;
 import victoriaslmn.android.viper.sample.presentation.common.Layout;
-import victoriaslmn.android.viper.sample.presentation.messages.bycontact.ByContactMessagesFragment;
-import victoriaslmn.android.viper.sample.presentation.messages.common.BaseMessagesFragment;
-import victoriaslmn.android.viper.sample.presentation.messages.chats.ChatsFragment;
+import victoriaslmn.android.viper.sample.presentation.injection.DaggerMainActivityComponent;
+import victoriaslmn.android.viper.sample.presentation.injection.DataModule;
+import victoriaslmn.android.viper.sample.presentation.injection.DomainModule;
+import victoriaslmn.android.viper.sample.presentation.injection.MainActivityComponent;
+import victoriaslmn.android.viper.sample.presentation.main.chats.ChatsFragment;
+import victoriaslmn.android.viper.sample.presentation.main.common.BaseMainFragment;
+import victoriaslmn.android.viper.sample.presentation.main.messages.MessagesFragment;
 
 @Layout(id = R.layout.activity_main)
-public class MessagesActivity extends BaseActivity implements MessagesRouter {
+public class MainActivity extends BaseActivity implements MainRouter {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.fab)
     FloatingActionButton floatingActionButton;
 
+    private MainActivityComponent mainActivityComponent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setSupportActionBar(toolbar);
+        mainActivityComponent =
+                DaggerMainActivityComponent
+                        .builder()
+                        .dataModule(new DataModule())
+                        .domainModule(new DomainModule())
+                        .build();
     }
 
     @Override
@@ -39,7 +51,7 @@ public class MessagesActivity extends BaseActivity implements MessagesRouter {
         return super.onCreateOptionsMenu(menu);
     }
 
-    private void addBackStack(BaseMessagesFragment fragment) {
+    private void addBackStack(BaseMainFragment fragment) {
         Preconditions.checkNotNull(fragment);
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
         tx.replace(R.id.content, fragment);
@@ -47,7 +59,7 @@ public class MessagesActivity extends BaseActivity implements MessagesRouter {
         tx.commit();
     }
 
-    public void resolveFab(BaseMessagesFragment fragment) {
+    public void resolveFab(BaseMainFragment fragment) {
         if(fragment.getFabButtonIcon() > 0){
             floatingActionButton.setImageResource(fragment.getFabButtonIcon());
             floatingActionButton.setVisibility(View.VISIBLE);
@@ -59,7 +71,7 @@ public class MessagesActivity extends BaseActivity implements MessagesRouter {
 
     }
 
-    public void resolveToolbar(BaseMessagesFragment fragment) {
+    public void resolveToolbar(BaseMainFragment fragment) {
         toolbar.setTitle(fragment.getTitle());
         if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             toolbar.setNavigationIcon(R.mipmap.ic_arrow_back_white_24dp);
@@ -72,6 +84,10 @@ public class MessagesActivity extends BaseActivity implements MessagesRouter {
 
     @Override
     public void showChatDetails(Contact contact) {
-        addBackStack(ByContactMessagesFragment.newInstance(contact));
+        addBackStack(MessagesFragment.newInstance(contact));
+    }
+
+    public MainActivityComponent getMainActivityComponent() {
+        return mainActivityComponent;
     }
 }

@@ -1,4 +1,4 @@
-package victoriaslmn.android.viper.sample.presentation.messages.bycontact;
+package victoriaslmn.android.viper.sample.presentation.main.messages;
 
 import android.support.annotation.NonNull;
 
@@ -10,21 +10,20 @@ import javax.inject.Inject;
 import rx.Subscriber;
 import victoriaslmn.android.viper.sample.R;
 import victoriaslmn.android.viper.sample.domain.contacts.Contact;
-import victoriaslmn.android.viper.sample.domain.messages.GetMessagesByContactInteractor;
+import victoriaslmn.android.viper.sample.domain.messages.GetMessagesInteractor;
 import victoriaslmn.android.viper.sample.domain.messages.Message;
-import victoriaslmn.android.viper.sample.presentation.injection.Injector;
-import victoriaslmn.android.viper.sample.presentation.messages.common.BaseMessagesPresenter;
-import victoriaslmn.android.viper.sample.presentation.messages.common.TimeMapper;
+import victoriaslmn.android.viper.sample.presentation.main.common.BaseMainPresenter;
+import victoriaslmn.android.viper.sample.presentation.main.common.mappers.TimeMapper;
 
-public class ByContactMessagesPresenter extends BaseMessagesPresenter<ByContactMessagesView> {
+public class MessagesPresenter extends BaseMainPresenter<MessagesView> {
     private Contact contact;
     private final List<MessageViewModel> viewModels = new ArrayList<>();
 
     @Inject
-    GetMessagesByContactInteractor getMessagesByContactInteractor;
+    GetMessagesInteractor getMessagesInteractor;
 
-    public ByContactMessagesPresenter() {
-        Injector.getPresentersComponent().inject(this);
+    public MessagesPresenter() {
+        getView().getMainActivityComponent().inject(this);
     }
 
     public void init(@NonNull Contact contact) {
@@ -37,7 +36,7 @@ public class ByContactMessagesPresenter extends BaseMessagesPresenter<ByContactM
         if (contact == null) {
             return;
         }
-        getMessagesByContactInteractor.execute(contact, new Subscriber<List<Message>>() {
+        getMessagesInteractor.execute(contact, new Subscriber<List<Message>>() {
             @Override
             public void onCompleted() {
             }
@@ -71,6 +70,6 @@ public class ByContactMessagesPresenter extends BaseMessagesPresenter<ByContactM
 
     @Override
     public void onStop() {
-        getMessagesByContactInteractor.unsubscribe();
+        getMessagesInteractor.unsubscribe();
     }
 }

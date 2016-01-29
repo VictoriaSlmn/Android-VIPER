@@ -7,14 +7,14 @@ import javax.inject.Named;
 import rx.Observable;
 import rx.Scheduler;
 import victoriaslmn.android.viper.sample.domain.common.Interactor;
-import victoriaslmn.android.viper.sample.presentation.injection.PresentationModule;
+import victoriaslmn.android.viper.sample.presentation.injection.DomainModule;
 
 public class GetContactsInteractor extends Interactor<List<Contact>, Void> {
 
     private final ContactsDataProvider contactsDataProvider;
 
-    public GetContactsInteractor(@Named(PresentationModule.JOB) Scheduler jobScheduler,
-                                 @Named(PresentationModule.UI) Scheduler iuScheduler,
+    public GetContactsInteractor(@Named(DomainModule.JOB) Scheduler jobScheduler,
+                                 @Named(DomainModule.UI) Scheduler iuScheduler,
                                  ContactsDataProvider contactsDataProvider) {
         super(jobScheduler, iuScheduler);
         this.contactsDataProvider = contactsDataProvider;

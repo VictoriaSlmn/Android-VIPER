@@ -1,4 +1,4 @@
-package victoriaslmn.android.viper.sample.presentation.messages.common;
+package victoriaslmn.android.viper.sample.presentation.main.common.mappers;
 
 
 import java.text.SimpleDateFormat;

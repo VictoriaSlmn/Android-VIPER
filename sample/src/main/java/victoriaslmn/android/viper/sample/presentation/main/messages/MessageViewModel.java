@@ -1,4 +1,4 @@
-package victoriaslmn.android.viper.sample.presentation.messages.bycontact;
+package victoriaslmn.android.viper.sample.presentation.main.messages;
 
 public class MessageViewModel {
     private final String time;
