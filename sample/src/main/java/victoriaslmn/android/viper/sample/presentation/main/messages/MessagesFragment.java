@@ -1,22 +1,29 @@
 package victoriaslmn.android.viper.sample.presentation.main.messages;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.Bind;
 import victoriaslmn.android.viper.sample.R;
 import victoriaslmn.android.viper.sample.domain.contacts.Contact;
+import victoriaslmn.android.viper.sample.presentation.common.BasePresenter;
 import victoriaslmn.android.viper.sample.presentation.common.Layout;
 import victoriaslmn.android.viper.sample.presentation.main.MainActivity;
 import victoriaslmn.android.viper.sample.presentation.main.common.BaseMainFragment;
 
 @Layout(id = R.layout.recycler_view)
-public class MessagesFragment extends BaseMainFragment<MessagesPresenter> implements MessagesView {
+public class MessagesFragment extends BaseMainFragment implements MessagesView {
     private static final String CONTACT = "CONTACT";
+
+    @Inject
+    MessagesPresenter messagesPresenter;
 
     @Bind(R.id.chats_recycler_view)
     RecyclerView recyclerView;
@@ -37,12 +44,18 @@ public class MessagesFragment extends BaseMainFragment<MessagesPresenter> implem
         super.onActivityCreated(savedInstanceState);
         Contact contact = (Contact) getArguments().getSerializable(CONTACT);
         assert contact != null;
-        getPresenter().init(contact);
+        messagesPresenter.init(contact);
+    }
+
+    @NonNull
+    @Override
+    protected BasePresenter getPresenter() {
+        return messagesPresenter;
     }
 
     @Override
-    protected void injectPresenter() {
-        getMainActivityComponent().inject(getPresenter());
+    protected void inject() {
+        getMainActivityComponent().inject(this);
     }
 
     @Override

@@ -12,8 +12,12 @@ import victoriaslmn.android.viper.sample.presentation.main.common.BaseMainPresen
 
 public class ContactsPresenter extends BaseMainPresenter<ContactsView> {
 
+    private final GetContactsInteractor getContactsInteractor;
+
     @Inject
-    GetContactsInteractor getContactsInteractor;
+    public ContactsPresenter(GetContactsInteractor getContactsInteractor){
+        this.getContactsInteractor = getContactsInteractor;
+    }
 
     @Override
     public void onStart() {

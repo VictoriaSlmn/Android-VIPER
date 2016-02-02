@@ -17,8 +17,12 @@ public class ChatsPresenter extends BaseMainPresenter<ChatsView> {
 
     private final List<ChatViewModel> chatViewModels = new ArrayList<>();
 
+    private final GetChatsInteractor getChatsInteractor;
+
     @Inject
-    GetChatsInteractor getChatsInteractor;
+    public ChatsPresenter(GetChatsInteractor getChatsInteractor) {
+        this.getChatsInteractor = getChatsInteractor;
+    }
 
     @Override
     public void onStart() {

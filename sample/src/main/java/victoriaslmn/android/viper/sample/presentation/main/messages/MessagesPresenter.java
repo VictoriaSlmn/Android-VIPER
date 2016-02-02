@@ -18,9 +18,12 @@ import victoriaslmn.android.viper.sample.presentation.main.common.mappers.TimeMa
 public class MessagesPresenter extends BaseMainPresenter<MessagesView> {
     private Contact contact;
     private final List<MessageViewModel> viewModels = new ArrayList<>();
+    private final GetMessagesInteractor getMessagesInteractor;
 
     @Inject
-    GetMessagesInteractor getMessagesInteractor;
+    public MessagesPresenter(GetMessagesInteractor getMessagesInteractor) {
+        this.getMessagesInteractor = getMessagesInteractor;
+    }
 
     public void init(@NonNull Contact contact) {
         this.contact = contact;

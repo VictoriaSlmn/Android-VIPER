@@ -13,7 +13,7 @@ import victoriaslmn.android.viper.sample.presentation.common.BaseFragment;
 import victoriaslmn.android.viper.sample.presentation.injection.MainActivityComponent;
 import victoriaslmn.android.viper.sample.presentation.main.MainActivity;
 
-public abstract class BaseMainFragment<Presenter extends BaseMainPresenter> extends BaseFragment<Presenter> implements BaseMainView {
+public abstract class BaseMainFragment extends BaseFragment implements BaseMainView {
 
     public abstract String getTitle();
 
@@ -32,7 +32,6 @@ public abstract class BaseMainFragment<Presenter extends BaseMainPresenter> exte
         super.onActivityCreated(savedInstanceState);
         setRetainInstance(true);
         MainActivity mainActivity = (MainActivity) getActivity();
-        injectPresenter();
         //noinspection unchecked
         getPresenter().setRouter(mainActivity);
         mainActivity.resolveToolbar(this);
@@ -51,9 +50,6 @@ public abstract class BaseMainFragment<Presenter extends BaseMainPresenter> exte
     public void showNewMessagesNotification() {
         Snackbar.make(getView(), R.string.new_message_comming, Snackbar.LENGTH_LONG).show();
     }
-
-
-    protected abstract void injectPresenter();
 
     protected MainActivityComponent getMainActivityComponent() {
         return ((MainActivity)getActivity()).getMainActivityComponent();

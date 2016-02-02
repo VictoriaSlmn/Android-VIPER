@@ -1,22 +1,20 @@
 package victoriaslmn.android.viper.sample.presentation.common;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.ParameterizedType;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import butterknife.ButterKnife;
 
-public abstract class BaseFragment<Presenter extends BasePresenter> extends Fragment {
+public abstract class BaseFragment extends Fragment {
     private static final AtomicInteger lastFragmentId = new AtomicInteger(0);
     private final int fragmentId;
-
-    private Presenter presenter;
 
     public BaseFragment() {
         fragmentId = lastFragmentId.incrementAndGet();
@@ -36,35 +34,21 @@ public abstract class BaseFragment<Presenter extends BasePresenter> extends Frag
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        try {
-            initPresenter();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        inject();
         //noinspection unchecked
-        presenter.setView(this);
+        getPresenter().setView(this);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        presenter.onStart();
-    }
-
-    @SuppressWarnings("unchecked")
-    private void initPresenter() throws ClassNotFoundException,
-            IllegalAccessException, java.lang.InstantiationException {
-        ParameterizedType pt
-                = (ParameterizedType) getClass().getGenericSuperclass();
-        String parameterClassName
-                = pt.getActualTypeArguments()[0].toString().split("\\s")[1];
-        presenter = (Presenter) Class.forName(parameterClassName).newInstance();
+        getPresenter().onStart();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        presenter.onStop();
+        getPresenter().onStop();
     }
 
 
@@ -78,7 +62,8 @@ public abstract class BaseFragment<Presenter extends BasePresenter> extends Frag
         return Long.toString(fragmentId);
     }
 
-    protected Presenter getPresenter() {
-        return presenter;
-    }
+    @NonNull
+    protected abstract BasePresenter getPresenter();
+
+    protected abstract void inject();
 }
