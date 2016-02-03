@@ -29,9 +29,7 @@ public class MessageDataProviderTest {
         TestScheduler testScheduler = Schedulers.test();
         TestSubscriber<List<Message>> testSubscriber = new TestSubscriber<>();
 
-        messagesDataProvider.getAllMessages(testScheduler).subscribe(listNotification -> {
-            listNotification.accept(testSubscriber);
-        });
+        messagesDataProvider.getAllMessages(testScheduler).subscribe(testSubscriber);
         testScheduler.advanceTimeBy(MessagesDataProviderImpl.PERIOD_UPDATE_IN_SECOND * times, TimeUnit.SECONDS);
 
         testSubscriber.assertNoErrors();

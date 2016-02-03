@@ -7,5 +7,5 @@ import rx.Observable;
 import rx.Scheduler;
 
 public interface MessagesDataProvider {
-    Observable<Notification<List<Message>>> getAllMessages(Scheduler scheduler);
+    Observable<List<Message>> getAllMessages(Scheduler scheduler);
 }

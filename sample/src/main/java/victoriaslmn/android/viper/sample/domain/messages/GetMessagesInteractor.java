@@ -25,7 +25,7 @@ public class GetMessagesInteractor extends Interactor<List<Message>, Contact> {
     @Override
     protected Observable<List<Message>> buildObservable(Contact parameter) {
         return messagesDataProvider.getAllMessages(jobScheduler)
-                .flatMap(listNotification -> Observable.from(listNotification.getValue())
+                .flatMap(listNotification -> Observable.from(listNotification)
                         .filter(r -> r.getContact().equals(parameter))
                         .toSortedList((message1, message2) -> {
                             if (message1.getTimestamp() == message2.getTimestamp()) {

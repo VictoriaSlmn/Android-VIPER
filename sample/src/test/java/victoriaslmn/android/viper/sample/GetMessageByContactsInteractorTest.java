@@ -38,7 +38,7 @@ public class GetMessageByContactsInteractorTest {
         MessagesDataProvider messagesDataProvider = mock(MessagesDataProvider.class);
         TestScheduler testScheduler = Schedulers.test();
         when(messagesDataProvider.getAllMessages(testScheduler))
-                .thenReturn(Observable.just(Notification.createOnNext(Arrays.asList(message1, message2, message3))));
+                .thenReturn(Observable.just(Arrays.asList(message1, message2, message3)  ));
         GetMessagesInteractor getLastMessagesByContactsInteractor
                 = new GetMessagesInteractor(testScheduler, testScheduler, messagesDataProvider);
         TestSubscriber<List<Message>> testSubscriber = new TestSubscriber<>();

@@ -18,10 +18,9 @@ public class MessagesDataProviderImpl implements MessagesDataProvider {
     public static long NOW = new Date().getTime();
 
     @Override
-    public Observable<Notification<List<Message>>> getAllMessages(Scheduler scheduler) {
+    public Observable<List<Message>> getAllMessages(Scheduler scheduler) {
         return Observable.interval(0, PERIOD_UPDATE_IN_SECOND, TimeUnit.SECONDS, scheduler)
-                .flatMap(this::getMessages)
-                .materialize();
+                .flatMap(this::getMessages);
     }
 
     private synchronized Observable<List<Message>> getMessages(long times) {

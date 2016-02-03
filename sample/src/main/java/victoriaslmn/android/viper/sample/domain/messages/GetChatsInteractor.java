@@ -27,7 +27,7 @@ public class GetChatsInteractor extends Interactor<List<Message>, Void> {
     @Override
     protected Observable<List<Message>> buildObservable(Void parametr) {
         return messagesDataProvider.getAllMessages(jobScheduler)
-                .concatMap(listNotification -> Observable.from(listNotification.getValue())
+                .concatMap(listNotification -> Observable.from(listNotification)
                         .toMultimap(Message::getContact)
                         .concatMap(multimap -> Observable.from(multimap.values()))
                         .concatMap(messages -> {
