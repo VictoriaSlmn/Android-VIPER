@@ -9,7 +9,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import rx.Notification;
 import rx.Observable;
 import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
@@ -26,7 +25,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(RobolectricGradleTestRunner.class)
 @Config(constants = BuildConfig.class, sdk = 21)
-public class GetLastMessagesByContactsInteractorTest {
+public class GetChatsInteractorTest {
 
     @Test
     public void testLatestMessageByContactsIsCorrect() {

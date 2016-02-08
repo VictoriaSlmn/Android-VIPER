@@ -38,7 +38,6 @@ public abstract class BaseMainFragment extends BaseFragment implements BaseMainV
         mainActivity.resolveFab(this);
     }
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -48,6 +47,7 @@ public abstract class BaseMainFragment extends BaseFragment implements BaseMainV
 
     @Override
     public void showNewMessagesNotification() {
+        //noinspection ConstantConditions
         Snackbar.make(getView(), R.string.new_message_comming, Snackbar.LENGTH_LONG).show();
     }
 

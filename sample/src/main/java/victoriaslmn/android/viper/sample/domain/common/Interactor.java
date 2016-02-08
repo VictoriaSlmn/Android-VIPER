@@ -9,11 +9,11 @@ import rx.subscriptions.CompositeSubscription;
 public abstract class Interactor<ResultType, ParameterType> {
     private CompositeSubscription subscription = new CompositeSubscription();
     protected final Scheduler jobScheduler;
-    private final Scheduler iuScheduler;
+    private final Scheduler uiScheduler;
 
-    public Interactor(Scheduler jobScheduler, Scheduler iuScheduler) {
+    public Interactor(Scheduler jobScheduler, Scheduler uiScheduler) {
         this.jobScheduler = jobScheduler;
-        this.iuScheduler = iuScheduler;
+        this.uiScheduler = uiScheduler;
     }
 
     protected abstract Observable<ResultType> buildObservable(ParameterType parameter);
@@ -21,7 +21,7 @@ public abstract class Interactor<ResultType, ParameterType> {
     public void execute(ParameterType parameter, Subscriber<ResultType> subscriber) {
         subscription.add(buildObservable(parameter)
                 .subscribeOn(jobScheduler)
-                .observeOn(iuScheduler)
+                .observeOn(uiScheduler)
                 .subscribe(subscriber));
     }
 
