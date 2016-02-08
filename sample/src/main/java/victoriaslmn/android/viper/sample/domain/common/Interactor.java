@@ -7,7 +7,7 @@ import rx.subscriptions.CompositeSubscription;
 
 
 public abstract class Interactor<ResultType, ParameterType> {
-    private CompositeSubscription subscription = new CompositeSubscription();
+    private final CompositeSubscription subscription = new CompositeSubscription();
     protected final Scheduler jobScheduler;
     private final Scheduler uiScheduler;
 
@@ -30,9 +30,6 @@ public abstract class Interactor<ResultType, ParameterType> {
     }
 
     public void unsubscribe() {
-        if (!subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
-        }
-        subscription = new CompositeSubscription();
+        subscription.clear();
     }
 }
