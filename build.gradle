@@ -15,8 +15,5 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
-        maven {
-            url 'http://jenkins01.mobile.rambler.ru:7700/nexus/content/repositories/rambler-internal/'
-        }
     }
 }

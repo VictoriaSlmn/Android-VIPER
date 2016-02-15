@@ -49,7 +49,6 @@ dependencies {
 
     compile 'com.google.dagger:dagger:2.0.2'
 
-    compile 'ru.rambler.android:rambler-id:1.1.4'
     compile 'com.squareup.okhttp:okhttp:2.6.0'
     compile 'io.reactivex:rxandroid:1.0.1'
 
